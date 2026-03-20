@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DermalScan - Skin Aging Detection</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <h1>DermalScan</h1>
+      <p>AI Facial Skin Aging Detection</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="split-container">
+
+    <!-- Left Box: Upload + Preview -->
+    <div class="left-box">
+      <h2>Upload & Preview</h2>
+      <div class="upload-section">
+        <label for="imageUpload" class="upload-label">Choose Image</label>
+        <input type="file" id="imageUpload" accept="image/*">
+      </div>
+      <div class="preview-container">
+        <img id="imagePreview" src="" alt="Uploaded Image Preview">
+      </div>
+    </div>
+
+    <!-- Right Box: Prediction + Annotation -->
+    <div class="right-box">
+      <h2>Prediction & Annotation</h2>
+      <div class="annotation-container">
+        <img id="annotatedImage" src="" alt="Annotated Image">
+      </div>
+      <div class="prediction-info">
+        <p id="predictedClass">Class: -</p>
+        <p id="confidence">Confidence: -</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>© 2026 DermalScan | AI Facial Skin Aging Detection App</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="../static/script.js"></script>
+</body>
+</html>
