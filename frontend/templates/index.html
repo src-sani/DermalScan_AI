@@ -1,58 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DermalScan - Skin Aging Detection</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DermalScan — Skin Condition Detector</title>
+  <link rel="stylesheet" href="../static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Header -->
   <header>
-    <div class="header-content">
-      <h1>DermalScan</h1>
-      <p>AI Facial Skin Aging Detection</p>
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="brand">
+          <svg width="22" height="22" viewBox="0 0 26 26" fill="none">
+            <circle cx="13" cy="13" r="12" stroke="#9d8189" stroke-width="1.8"/>
+            <circle cx="13" cy="10" r="4" stroke="#9d8189" stroke-width="1.5"/>
+            <path d="M9 17c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#9d8189" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-name">DermalScan</span>
+        </div>
+        <span class="brand-divider"></span>
+        <span class="brand-sub">AI Facial Skin Condition Analysis</span>
+      </div>
+      <span class="header-tag">4-Class Deep Learning Model</span>
+    </div>
+
+    <!-- Upload strip inside header -->
+    <div class="upload-strip" id="uploadStrip">
+      <div class="strip-left">
+        <p class="strip-title">Upload a facial photo to begin analysis</p>
+        <p class="strip-hint">Clear, well-lit frontal image works best · JPG, PNG, WEBP</p>
+      </div>
+      <div class="strip-right">
+        <input type="file" id="fileInput" accept="image/*" hidden />
+        <button class="upload-btn" id="uploadBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Choose Image
+        </button>
+        <span class="or-text">or drop anywhere</span>
+      </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="split-container">
+  <main id="mainContent">
 
-    <!-- Left Box: Upload + Preview -->
-    <div class="left-box">
-      <h2>Upload & Preview</h2>
-      <div class="upload-section">
-        <label for="imageUpload" class="upload-label">Choose Image</label>
-        <input type="file" id="imageUpload" accept="image/*">
-      </div>
-      <div class="preview-container">
-        <img id="imagePreview" src="" alt="Uploaded Image Preview">
+    <!-- Empty state -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-inner">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="4" y="4" width="40" height="40" rx="10" stroke="#d8e2dc" stroke-width="2"/>
+          <circle cx="17" cy="18" r="4" stroke="#f4acb7" stroke-width="1.8"/>
+          <path d="M4 34 L14 24 L22 32 L30 22 L44 38" stroke="#ffcad4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="empty-title">No image uploaded yet</p>
+        <p class="empty-sub">Use the upload button above to get started</p>
       </div>
     </div>
 
-    <!-- Right Box: Prediction + Annotation -->
-    <div class="right-box">
-      <h2>Prediction & Annotation</h2>
-      <div class="annotation-container">
-        <img id="annotatedImage" src="" alt="Annotated Image">
-      </div>
-      <div class="prediction-info">
-        <p id="predictedClass">Class: -</p>
-        <p id="confidence">Confidence: -</p>
-      </div>
-    </div>
+    <!-- Results -->
+    <section class="results-section" id="resultsSection" hidden>
 
+      <div class="results-grid">
+
+        <!-- LEFT: image + condition note -->
+        <div class="left-col">
+
+          <div class="card image-card">
+            <div class="card-header">
+              <span class="card-title">Detection Map</span>
+              <span class="result-badge" id="resultBadge"></span>
+            </div>
+            <div class="image-wrap" id="imageWrap">
+              <img id="uploadedImg" src="" alt="Uploaded face" />
+              <div class="bbox" id="bbox">
+                <span class="bbox-tag" id="bboxTag"></span>
+              </div>
+            </div>
+            <p class="image-note" id="imageNote"></p>
+          </div>
+
+          <!-- Condition description below image -->
+          <div class="card condition-card" id="conditionCard">
+            <div class="card-header">
+              <span class="card-title">About this condition</span>
+              <span class="condition-chip" id="conditionChip"></span>
+            </div>
+            <p class="condition-desc" id="conditionDesc"></p>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: stats + insights -->
+        <div class="right-col">
+
+          <div class="card result-card">
+            <div class="card-header">
+              <span class="card-title">Primary Condition</span>
+              <span class="live-dot"></span>
+            </div>
+            <p class="result-class" id="resultClass"></p>
+            <div class="conf-row">
+              <span class="conf-label">Confidence</span>
+              <span class="conf-val" id="confVal"></span>
+            </div>
+            <div class="conf-track">
+              <div class="conf-fill" id="confFill"></div>
+            </div>
+          </div>
+
+          <div class="card chart-card">
+            <div class="card-header">
+              <span class="card-title">All Class Probabilities</span>
+            </div>
+            <div class="bar-chart" id="barChart"></div>
+          </div>
+
+          <div class="card tips-card" id="tipsCard">
+            <div class="card-header">
+              <span class="card-title">Care Insights</span>
+            </div>
+            <div class="tips-list" id="tipsList"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div class="footer-content">
-      <p>© 2026 DermalScan | AI Facial Skin Aging Detection App</p>
-    </div>
+    <span>DermalScan</span>
+    <span class="footer-dot">·</span>
+    <span>For educational & research purposes only — not a substitute for medical advice</span>
   </footer>
 
-  <!-- JS -->
   <script src="../static/script.js"></script>
 </body>
 </html>
