@@ -7,6 +7,8 @@ from preprocess import preprocess_image
 
 app = FastAPI()
 
+CLASS_NAMES = ["Clear Skin", "Dark Spots", "Puffy Eyes", "Wrinkles"]
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     
@@ -23,13 +25,13 @@ async def predict(file: UploadFile = File(...)):
     processed = preprocess_image(file_path)
 
     # prediction
-    preds = model.predict(processed)
+    preds = model.predict(processed)[0]
 
-    # get top class
     class_index = int(np.argmax(preds))
-    confidence = float(np.max(preds))
+    confidence = float(preds[class_index]) * 100
 
     return {
-        "class": class_index,
-        "confidence": confidence
+        "class": CLASS_NAMES[class_index],
+        "confidence": round(confidence, 2),
+        "all_probs": preds.tolist()
     }
