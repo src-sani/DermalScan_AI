@@ -9,12 +9,7 @@ import os
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 # ✅ Serve your frontend static files
 app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")

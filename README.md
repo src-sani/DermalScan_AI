@@ -52,13 +52,13 @@ A deep learning system for detecting facial aging signs (wrinkles, dark spots, p
 > **TASK:** Modularize inference code to load model and return predictions to UI  
 > **RESULT:** Pending implementation  
 
-> ### Module 7: Export and Logging of Predictions
-> **TASK:** Enable downloading of annotated images and CSV logs of predictions  
-> **RESULT:** Pending implementation  
+> ### Module 7: Testing, Generalization, and Result Validation  
+> **TASK:** Evaluate the trained model on diverse real-world images beyond the training dataset to test generalization.
+> **RESULT:** Model successfully tested on unseen images; demonstrated good generalization ability. Predictions were consistent across different inputs, and results were validated using screenshots.
 
-> ### Module 8: Documentation and Final Presentation
-> **TASK:** Prepare user/developer guides, GitHub repo, and presentation materials  
-> **RESULT:** Pending implementation  
+> ### Module 8: Documentation and Final Presentation  
+> **TASK:** Prepare user/developer guides, GitHub repository documentation, and presentation materials  
+> **RESULT:** Pending implementation   
 
 ---
 
