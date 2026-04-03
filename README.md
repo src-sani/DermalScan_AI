@@ -1,69 +1,94 @@
-# DermalScan: AI Facial Skin Aging Detection
+# 🌐 Skin Condition Classification Web Application
 
-A deep learning system for detecting facial aging signs (wrinkles, dark spots, puffy eyes, clear skin) using **EfficientNetB0**, with frontend UI under development for image upload and prediction visualization.
+## 📌 Overview
 
----
+This project is a full-stack machine learning web application developed as part of an academic internship project. The system performs image classification on skin images and predicts one of four skin conditions using a deep learning model.
 
-## 🔹 Project Modules Overview
-
-1. Dataset Setup and Image Labeling  
-2. Image Preprocessing, Augmentation, and One-Hot Encoding  
-3. EfficientNetB0-based Image Classification (Training & Evaluation)  
-4. Face Detection and Prediction Pipeline (Haar Cascade Experiment)  
-5. Web UI for Image Upload and Visualization  
-6. Backend Pipeline for Model Inference  
-7. Testing, Generalization, and Result Validation 
-8. Documentation and Final Presentation  
+The application provides real-time predictions along with confidence scores, making the results interpretable, transparent, and user-friendly.
 
 ---
 
-## 📌 Module-wise Progress
+## 🎯 Objective
 
-> ### Module 1: Dataset Setup and Image Labeling
-> **TASK:** Collect, inspect, and label dataset into 4 classes:  
-> wrinkles, dark spots, puffy eyes, clear skin  
-> **RESULT:** Dataset cleaned, labeled, and verified;  
-> balanced class distribution achieved  
+The main objective of this project is to design and implement an end-to-end deployable machine learning system that:
 
-> ### Module 2: Image Preprocessing, Augmentation, and One-Hot Encoding
-> **TASK:** Resize images to 224x224, normalize pixels,  
-> apply augmentation (flip, rotation, zoom), and encode labels  
-> **RESULT:** All images preprocessed and augmented;  
-> labels one-hot encoded; dataset ready for training  
-
-> ### Module 3: EfficientNetB0-based Image Classification (Training & Evaluation)
-> **TASK:** Train pretrained EfficientNetB0 with categorical cross-entropy  
-> and Adam optimizer; monitor accuracy/loss metrics  
-> **RESULT:** Model trained; achieved ~98% test accuracy;  
-> validation stable; training curves plotted  
-
-> ### Module 4: Face Detection and Prediction Pipeline (Haar Cascade Experiment)
-> **TASK:** Apply OpenCV Haar Cascade for face detection and crop regions  
-> for model input  
-> **RESULT:** Haar Cascade detected faces inconsistently;  
-> reduced classification accuracy; excluded from final pipeline  
-
-> ### Module 5: Web UI for Image Upload and Visualization
-> **TASK:** Design frontend interface using HTML/CSS; implement image upload  
-> and prediction preview  
-> **RESULT:** Pending implementation  
-
-> ### Module 6: Backend Pipeline for Model Inference
-> **TASK:** Modularize inference code to load model and return predictions to UI  
-> **RESULT:** Pending implementation  
-
-> ### Module 7: Testing, Generalization, and Result Validation  
-> **TASK:** Evaluate the trained model on diverse real-world images beyond the training dataset to test generalization.
-> **RESULT:** Model successfully tested on unseen images; demonstrated good generalization ability. Predictions were consistent across different inputs, and results were validated using screenshots.
-
-> ### Module 8: Documentation and Final Presentation  
-> **TASK:** Prepare user/developer guides, GitHub repository documentation, and presentation materials  
-> **RESULT:** Pending implementation   
+- Classifies skin images into predefined categories  
+- Provides prediction confidence scores  
+- Offers an interactive web interface for users  
+- Demonstrates real-world deployment of a deep learning model using modern web technologies  
 
 ---
 
-## 🛠️ Tech Stack
-- Python, TensorFlow/Keras  
-- OpenCV  
-- HTML + CSS (Frontend UI)  
-- Jupyter Notebooks for EDA & model training
+## 🏷️ Classes Predicted
+
+The model classifies input images into the following four categories:
+
+- Clear Skin  
+- Dark Spots  
+- Puffy Eyes  
+- Wrinkles  
+
+---
+
+## 📊 Dataset Description
+
+- Total images: ~1200  
+- Type: Labeled image dataset  
+- Number of classes: 4  
+- Preprocessing techniques: resizing, normalization, and augmentation  
+
+---
+
+## 🧠 Machine Learning Model
+
+- Architecture: EfficientNetB0  
+- Type: Transfer Learning Convolutional Neural Network (CNN)  
+- Framework: TensorFlow / Keras  
+- Output:
+  - Predicted class label  
+  - Confidence score  
+  - Probability distribution across all classes  
+
+---
+
+## 🏗️ System Architecture
+
+The system consists of three main components:
+
+### 1. Frontend
+- Built using HTML, CSS, and JavaScript  
+- Handles user interaction and image upload  
+- Displays prediction results and visualization  
+
+### 2. Backend
+- Built using FastAPI  
+- Handles image upload, preprocessing, and inference  
+- Returns prediction results as JSON response  
+
+### 3. Machine Learning Model
+- Trained EfficientNetB0 model  
+- Loaded during runtime for inference  
+- Performs classification on preprocessed images  
+
+---
+
+## 🔄 Workflow
+
+1. User uploads an image through the web interface  
+2. Frontend sends the image to the backend API  
+3. Backend preprocesses the image  
+4. Model performs inference on the image  
+5. Class probabilities are computed  
+6. Highest probability class is selected as prediction  
+7. Result and confidence score are sent back to frontend  
+8. UI displays prediction with visual indicators  
+
+---
+
+## ⚡ Key Features
+
+- Real-time image classification  
+- Confidence score visualization  
+- Probability distribution display  
+- Interactive drag-and-drop UI  
+- Lightweight and fast inference system  
