@@ -63,7 +63,7 @@ Face Detection → Cropping → EfficientNetB0 → Prediction
 
 Final system uses EfficientNetB0 directly on images without Haar Cascade.
 
-### 🔄 Pipeline Flow
+### Pipeline Flow
 Image → Preprocessing → EfficientNetB0 → Prediction
 
 ### ✅ Advantages
